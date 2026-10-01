@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Verification Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="generator-pro.css" />
+  <link rel="stylesheet" href="content-verification.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.3/html2pdf.bundle.min.js"></script>
+</head>
+<body class="pro">
+  <header class="pro-header">
+    <div class="pro-brand">
+      <span class="pro-logo">🔍</span>
+      <h1>Content Verification Tool</h1>
+    </div>
+    <a class="home-link dark" href="index.html">&larr; Home</a>
+  </header>
+
+  <!-- Stepper -->
+  <div class="stepper">
+    <div class="step active" id="step1">
+      <span class="step-num">1</span>
+      <span class="step-label">Upload &amp; Configure</span>
+    </div>
+    <span class="step-line"></span>
+    <div class="step" id="step2">
+      <span class="step-num">2</span>
+      <span class="step-label">Verification Report</span>
+    </div>
+  </div>
+
+  <main class="pro-main">
+    <!-- ============ STEP 1: FORM ============ -->
+    <section class="panel form-panel step-panel active" id="panel1">
+      <p class="cv-intro">
+        Compare an <strong>Actual</strong> PDF against a <strong>Reference</strong> PDF to detect gaps in
+        language, UI look &amp; feel, alignment, line separators, grammar and missing fields/values.
+        Comparison is powered by <strong>Apache PDFBox</strong> and <strong>red6 pdfcompare</strong>.
+      </p>
+
+      <form id="cvForm" novalidate>
+        <div class="cv-uploads">
+          <!-- Actual File -->
+          <div class="field">
+            <label class="field-label">Actual File <span class="req">*</span></label>
+            <div class="dropzone" id="actualDrop">
+              <input type="file" id="actualFile" accept="application/pdf,.pdf" hidden />
+              <span class="dz-icon">⬆️</span>
+              <p><a class="dz-link">Click to upload</a></p>
+              <span class="dz-note" id="actualNote">PDF files only (.pdf)</span>
+            </div>
+            <div class="chips" id="actualChips"></div>
+          </div>
+
+          <!-- Reference File -->
+          <div class="field">
+            <label class="field-label">Reference File <span class="req">*</span></label>
+            <div class="dropzone" id="refDrop">
+              <input type="file" id="refFile" accept="application/pdf,.pdf" hidden />
+              <span class="dz-icon">⬆️</span>
+              <p><a class="dz-link">Click to upload</a></p>
+              <span class="dz-note" id="refNote">PDF files only (.pdf)</span>
+            </div>
+            <div class="chips" id="refChips"></div>
+          </div>
+        </div>
+
+        <!-- Print Preview XML (optional) -->
+        <div class="field">
+          <label class="field-label">Upload Print Preview XML <span class="opt">(Optional)</span></label>
+          <div class="dropzone" id="xmlDrop">
+            <input type="file" id="xmlFile" accept="application/xml,text/xml,.xml" hidden />
+            <span class="dz-icon">⬆️</span>
+            <p><a class="dz-link">Click to upload</a> or drag and drop</p>
+            <span class="dz-note" id="xmlNote">XML files only (.xml)</span>
+          </div>
+          <div class="chips" id="xmlChips"></div>
+        </div>
+
+        <!-- Language -->
+        <div class="field">
+          <label class="field-label">Language <span class="req">*</span></label>
+          <p class="sub">Expected language of the document content.</p>
+          <div class="radio-group row">
+            <label class="radio"><input type="radio" name="language" value="English" checked /> <span>English</span></label>
+            <label class="radio"><input type="radio" name="language" value="German" /> <span>German</span></label>
+            <label class="radio"><input type="radio" name="language" value="French" /> <span>French</span></label>
+            <label class="radio"><input type="radio" name="language" value="Italian" /> <span>Italian</span></label>
+          </div>
+        </div>
+
+        <div class="actions center">
+          <button type="submit" class="btn btn-primary" id="compareBtn">🔍 Compare</button>
+          <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+        </div>
+
+        <p class="cv-engine-status" id="engineStatus">Checking backend…</p>
+      </form>
+    </section>
+
+    <!-- ============ STEP 2: RESULTS ============ -->
+    <section class="panel results-panel step-panel" id="panel2">
+      <div class="results-top">
+        <div>
+          <h2>Verification Report</h2>
+          <p class="sub" id="resultsSub">Gaps detected between the Actual and Reference PDF.</p>
+        </div>
+        <div class="results-top-actions">
+          <button type="button" class="btn btn-outline" id="backBtn">&larr; Back to Input</button>
+          <button type="button" class="btn btn-export" id="exportBtn" disabled>� Export Report</button>
+        </div>
+      </div>
+
+      <!-- Summary tiles -->
+      <div class="cv-summary" id="cvSummary"></div>
+
+      <!-- Visual preview: Actual · Expected · Difference -->
+      <div class="cv-preview" id="cvPreview" hidden>
+        <div class="cv-preview-head">
+          <h3>Visual Comparison <span class="cv-preview-tag">red6 pdfcompare</span></h3>
+          <label class="cv-diff-toggle">
+            <input type="checkbox" id="showDiffToggle" checked />
+            <span>Show Difference</span>
+          </label>
+        </div>
+        <p class="sub cv-diff-legend">
+          <span class="lg green"></span> present only in Actual
+          <span class="lg red"></span> missing from Actual
+          <span class="lg faded"></span> unchanged
+        </p>
+        <div class="cv-diff-grid" id="cvDiffGrid">
+          <div class="cv-diff-col">
+            <div class="cv-diff-col-head">Actual</div>
+            <iframe id="actualFrame" class="cv-diff-frame" title="Actual PDF"></iframe>
+          </div>
+          <div class="cv-diff-col">
+            <div class="cv-diff-col-head">Expected</div>
+            <iframe id="expectedFrame" class="cv-diff-frame" title="Expected PDF"></iframe>
+          </div>
+          <div class="cv-diff-col" id="diffCol">
+            <div class="cv-diff-col-head">
+              Difference
+              <a class="cv-diff-dl" id="downloadDiff" href="#" target="_blank" rel="noopener">⬇ Download</a>
+            </div>
+            <iframe id="diffFrame" class="cv-diff-frame" title="Difference PDF"></iframe>
+            <p class="cv-diff-none" id="diffNone" hidden>✓ No visual differences — the pages match pixel-by-pixel.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categorised findings -->
+      <div class="cv-report" id="cvReport"></div>
+    </section>
+  </main>
+
+  <!-- Full-screen loader -->
+  <div class="cv-loader" id="cvLoader" hidden>
+    <div class="cv-spinner"></div>
+    <p id="cvLoaderMsg">Analysing PDFs…</p>
+  </div>
+
+  <script src="content-verification.js"></script>
+</body>
+</html>

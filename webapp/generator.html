@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Case Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- SheetJS for Excel export/parse -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <span class="logo">TC</span>
+      <div>
+        <h1>Test Case Generator Tools</h1>
+        <p>Generate structured test cases from references, keywords &amp; scenarios</p>
+      </div>
+    </div>
+    <a class="home-link" href="index.html">&larr; Home</a>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="input">1. Inputs</button>
+    <button class="tab-btn" data-tab="results" id="resultsTabBtn" disabled>2. Generated Test Cases</button>
+  </nav>
+
+  <main>
+    <!-- ================= INPUT TAB ================= -->
+    <section id="tab-input" class="tab-panel active">
+      <form id="generatorForm" novalidate>
+
+        <!-- Reference Test Cases -->
+        <div class="field">
+          <label class="field-label">
+            Reference Test Cases
+            <span class="hint">Upload up to 5 Excel files (.xlsx, .xls)</span>
+          </label>
+          <div class="upload-box" id="refDropZone">
+            <input type="file" id="refFiles" accept=".xlsx,.xls" multiple hidden />
+            <button type="button" class="btn btn-outline" id="refBrowseBtn">Select Excel Files</button>
+            <span class="upload-note">Maximum 5 files</span>
+          </div>
+          <ul class="file-list" id="refFileList"></ul>
+        </div>
+
+        <!-- Test Case Level -->
+        <div class="field">
+          <label class="field-label">Test Case Level <span class="req">*</span></label>
+          <div class="radio-group" id="typeGroup">
+            <label class="radio"><input type="radio" name="testType" value="Unit" checked /> <span>Unit</span></label>
+            <label class="radio"><input type="radio" name="testType" value="System" /> <span>System</span></label>
+            <label class="radio"><input type="radio" name="testType" value="System Integration" /> <span>System Integration</span></label>
+            <label class="radio"><input type="radio" name="testType" value="Business End to End (E2E)/UAT" /> <span>Business End to End (E2E)/UAT</span></label>
+          </div>
+        </div>
+
+        <!-- Targeted Functionalites -->
+        <div class="field">
+          <label class="field-label" for="functionality">Targeted Functionalites <span class="req">*</span></label>
+          <input type="text" id="functionality" placeholder="e.g. Fund Transfer, Login Authentication" />
+        </div>
+
+        <div class="grid-2">
+          <!-- Keywords -->
+          <div class="field">
+            <label class="field-label" for="keywords">Keywords <span class="req">*</span></label>
+            <textarea id="keywords" rows="2" placeholder="comma separated e.g. balance, validation, limit"></textarea>
+          </div>
+
+          <!-- Channels -->
+          <div class="field">
+            <label class="field-label" for="channels">Channels</label>
+            <textarea id="channels" rows="2" placeholder="comma separated e.g. Web, Mobile, ATM"></textarea>
+          </div>
+        </div>
+
+        <!-- Use Case -->
+        <div class="field">
+          <label class="field-label">
+            Use Case
+          </label>
+          <div class="upload-box">
+            <input type="file" id="useCaseFile" accept=".ppt,.pptx,.pdf" hidden />
+            <button type="button" class="btn btn-outline" id="useCaseBrowseBtn">Select PPT / PDF</button>
+            <span class="upload-note" id="useCaseName">No file selected</span>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Scenario -->
+          <div class="field">
+            <label class="field-label" for="scenario">Scenario</label>
+            <textarea id="scenario" rows="2" placeholder="comma separated scenarios"></textarea>
+          </div>
+
+          <!-- Golden Test Case -->
+          <div class="field">
+            <label class="field-label">
+              Golden Test Case
+              <span class="hint">Please provide Single Test case with all proper Navigation, Clicks and Workflows mentioned which can be referred in to be genareted test cases</span>
+            </label>
+            <div class="upload-box">
+              <input type="file" id="goldenFile" accept=".xlsx,.xls" hidden />
+              <button type="button" class="btn btn-outline" id="goldenBrowseBtn">Select Excel File</button>
+              <span class="upload-note" id="goldenName">No file selected</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="generateBtn">Generate</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ================= RESULTS TAB ================= -->
+    <section id="tab-results" class="tab-panel">
+      <div class="results-header">
+        <div>
+          <h2>Generated Test Cases</h2>
+          <p id="resultsSummary" class="results-summary"></p>
+        </div>
+        <div class="results-actions">
+          <button type="button" class="btn btn-outline" id="backBtn">Back to Inputs</button>
+          <button type="button" class="btn btn-primary" id="exportBtn">Export to Excel</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Channel</th>
+              <th>Precondition</th>
+              <th>Test Steps</th>
+              <th>Expected Result</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

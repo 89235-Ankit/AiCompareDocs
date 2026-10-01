@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>ADIA — Document Verification</title>
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="generator-pro.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="content-ADIA.css"
+  />
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.3/html2pdf.bundle.min.js">
+  </script>
+
+</head>
+
+
+<body class="adia-app">
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="adia-header">
+
+  <div class="header-left">
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+    >
+      ☰
+    </button>
+
+
+    <div class="avaloq-brand">
+
+      <span class="avaloq-logo">
+        avaloq
+      </span>
+
+    </div>
+
+
+    <div class="brand-divider"></div>
+
+
+    <div class="adia-brand">
+
+      <strong>
+        ADIA
+      </strong>
+
+      <span>
+        Avaloq Document Intelligence Agent
+      </span>
+
+    </div>
+
+
+    <span class="hackathon-badge">
+      Hackathon Edition
+    </span>
+
+  </div>
+
+
+  <div class="header-right">
+
+    <div class="user-profile">
+
+      <div class="avatar">
+       GU
+      </div>
+
+      <div class="user-name">
+        Guest user
+      </div>
+
+      <span>
+        ⌄
+      </span>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
+
+<div class="app-layout">
+
+
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
+
+  <aside
+    class="adia-sidebar"
+    id="sidebar"
+  >
+
+    <nav class="sidebar-nav">
+
+
+      <!-- VERIFY DOCUMENT -->
+
+      <a
+        href="#"
+        class="nav-item active"
+        id="verifyDocumentNav"
+      >
+
+        <span class="nav-icon">
+          ⇧
+        </span>
+
+        <span>
+          Verify Document
+        </span>
+
+      </a>
+
+
+      <!-- HISTORY -->
+
+      <a
+        href="#"
+        class="nav-item"
+      >
+
+        <span class="nav-icon">
+          ◷
+        </span>
+
+        <span>
+          History
+        </span>
+
+      </a>
+
+
+      <!-- DASHBOARD -->
+
+      <!-- IMPORTANT:
+           Do NOT use step1 here.
+           step1 is reserved for the actual stepper. -->
+
+      <a
+        href="#"
+        class="nav-item"
+      >
+
+        <span class="nav-icon">
+          ▥
+        </span>
+
+        <span>
+          Dashboard
+        </span>
+
+      </a>
+
+
+      <!-- REPORTS -->
+
+      <!-- IMPORTANT:
+           Do NOT use step2 here.
+           step2 is reserved for the actual stepper. -->
+
+      <a
+        href="#"
+        class="nav-item"
+      >
+
+        <span class="nav-icon">
+          ▤
+        </span>
+
+        <span>
+          Reports
+        </span>
+
+      </a>
+
+
+      <!-- ASK ADIA -->
+
+      <a
+        href="#"
+        class="nav-item"
+        id="aiChatButton"
+      >
+
+        <span class="nav-icon">
+          ▢
+        </span>
+
+        <span>
+          Ask ADIA
+        </span>
+
+      </a>
+
+
+      <!-- SETTINGS -->
+
+      <a
+        href="#"
+        class="nav-item"
+      >
+
+        <span class="nav-icon">
+          ⚙
+        </span>
+
+        <span>
+          Settings
+        </span>
+
+      </a>
+
+    </nav>
+
+
+    <!-- =====================================================
+         QUICK STATS
+    ====================================================== -->
+
+    <div class="quick-stats">
+
+      <h4>
+        Quick Stats
+      </h4>
+
+
+      <div class="stat-item">
+
+        <div class="stat-icon blue">
+          ▤
+        </div>
+
+        <div>
+
+          <strong>
+            1,248
+          </strong>
+
+          <span>
+            Documents Verified
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-item">
+
+        <div class="stat-icon cyan">
+          ◎
+        </div>
+
+        <div>
+
+          <strong>
+            32
+          </strong>
+
+          <span>
+            Languages Covered
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-item">
+
+        <div class="stat-icon green">
+          ✓
+        </div>
+
+        <div>
+
+          <strong>
+            96%
+          </strong>
+
+          <span>
+            Avg. Compliance Score
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="stat-item">
+
+        <div class="stat-icon purple">
+          ◷
+        </div>
+
+        <div>
+
+          <strong>
+            85%
+          </strong>
+
+          <span>
+            Manual Effort Reduced
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-footer">
+      © 2026 Avaloq
+    </div>
+
+  </aside>
+
+
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
+
+  <main class="adia-main">
+
+
+    <!-- =====================================================
+         STEPPER
+    ====================================================== -->
+
+    <div class="stepper">
+
+      <div
+        class="step active"
+        id="step1"
+      >
+
+        <span class="step-num">
+          1
+        </span>
+
+        <span class="step-label">
+          Upload &amp; Configure
+        </span>
+
+      </div>
+
+
+      <span class="step-line"></span>
+
+
+      <div
+        class="step"
+        id="step2"
+      >
+
+        <span class="step-num">
+          2
+        </span>
+
+        <span class="step-label">
+          Results &amp; Report
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STEP 1
+    ====================================================== -->
+
+    <section
+      class="step-panel active"
+      id="panel1"
+    >
+
+
+      <!-- ===================================================
+           HERO
+      ==================================================== -->
+
+      <section class="adia-hero">
+
+        <div class="hero-content">
+
+          <div class="hero-icon">
+            🔎
+          </div>
+
+
+          <div>
+
+            <h1>
+              Verify Customer Documents with AI
+            </h1>
+
+            <p>
+              Upload your documents and let ADIA analyze
+              content, layout, language, compliance and
+              business meaning.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="hero-flow">
+
+          <div class="pdf-visual">
+
+            <span>
+              🇬🇧
+            </span>
+
+            <strong>
+              PDF
+            </strong>
+
+            <small>
+              Actual
+            </small>
+
+          </div>
+
+
+          <div class="flow-arrow">
+            →
+          </div>
+
+
+          <div class="ai-circle">
+            🧠
+          </div>
+
+
+          <div class="flow-arrow">
+            →
+          </div>
+
+
+          <div class="pdf-visual">
+
+            <span>
+              🇩🇪
+            </span>
+
+            <strong>
+              PDF
+            </strong>
+
+            <small>
+              Reference
+            </small>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           CONTENT + ASSISTANT
+      ==================================================== -->
+
+      <div class="content-with-assistant">
+
+
+        <!-- =================================================
+             VERIFICATION CONTENT
+        ================================================== -->
+
+        <div class="verification-content">
+
+          <form
+            id="cvForm"
+            novalidate
+          >
+
+
+            <!-- =============================================
+                 UPLOAD CARDS
+            ============================================== -->
+
+            <div class="upload-grid">
+
+
+              <!-- ACTUAL DOCUMENT -->
+
+              <div class="upload-card">
+
+                <div class="card-header">
+
+                  <div class="card-icon">
+                    ⇧
+                  </div>
+
+                  <div>
+
+                    <h3>
+                      Actual Document
+                      <span class="required">*</span>
+                    </h3>
+
+                    <p>
+                      Upload the generated/actual PDF
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="dropzone"
+                  id="actualDrop"
+                >
+
+                  <input
+                    type="file"
+                    id="actualFile"
+                    accept="application/pdf,.pdf"
+                    hidden
+                  />
+
+
+                  <div class="upload-symbol">
+                    ☁
+                  </div>
+
+
+                  <strong>
+                    Drag &amp; drop PDF here
+                  </strong>
+
+
+                  <a
+                    class="dz-link"
+                    href="javascript:void(0)"
+                  >
+                    or browse files
+                  </a>
+
+
+                  <small>
+                    PDF files only · Max 20 MB
+                  </small>
+
+                </div>
+
+
+                <div
+                  class="chips"
+                  id="actualChips"
+                ></div>
+
+
+                <span
+                  class="dz-note"
+                  id="actualNote"
+                  hidden
+                >
+                  PDF files only (.pdf)
+                </span>
+
+              </div>
+
+
+              <!-- REFERENCE DOCUMENT -->
+
+              <div class="upload-card">
+
+                <div class="card-header">
+
+                  <div class="card-icon">
+                    ▤
+                  </div>
+
+                  <div>
+
+                    <h3>
+                      Reference Document
+                      <span class="required">*</span>
+                    </h3>
+
+                    <p>
+                      Upload the expected/reference PDF
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="dropzone"
+                  id="refDrop"
+                >
+
+                  <input
+                    type="file"
+                    id="refFile"
+                    accept="application/pdf,.pdf"
+                    hidden
+                  />
+
+
+                  <div class="upload-symbol">
+                    ☁
+                  </div>
+
+
+                  <strong>
+                    Drag &amp; drop PDF here
+                  </strong>
+
+
+                  <a
+                    class="dz-link"
+                    href="javascript:void(0)"
+                  >
+                    or browse files
+                  </a>
+
+
+                  <small>
+                    PDF files only · Max 20 MB
+                  </small>
+
+                </div>
+
+
+                <div
+                  class="chips"
+                  id="refChips"
+                ></div>
+
+
+                <span
+                  class="dz-note"
+                  id="refNote"
+                  hidden
+                >
+                  PDF files only (.pdf)
+                </span>
+
+              </div>
+
+
+              <!-- XML -->
+
+              <div class="upload-card">
+
+                <div class="card-header">
+
+                  <div class="card-icon">
+                    &lt;/&gt;
+                  </div>
+
+                  <div>
+
+                    <h3>
+
+                      Print Preview XML
+
+                      <span class="optional">
+                        Optional
+                      </span>
+
+                    </h3>
+
+                    <p>
+                      Upload XML for enhanced validation
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div
+                  class="dropzone"
+                  id="xmlDrop"
+                >
+
+                  <input
+                    type="file"
+                    id="xmlFile"
+                    accept="application/xml,text/xml,.xml"
+                    hidden
+                  />
+
+
+                  <div class="upload-symbol xml">
+                    &lt;/&gt;
+                  </div>
+
+
+                  <strong>
+                    Drag &amp; drop XML here
+                  </strong>
+
+
+                  <a
+                    class="dz-link"
+                    href="javascript:void(0)"
+                  >
+                    or browse files
+                  </a>
+
+
+                  <small>
+                    XML files only
+                  </small>
+
+                </div>
+
+
+                <div
+                  class="chips"
+                  id="xmlChips"
+                ></div>
+
+
+                <span
+                  class="dz-note"
+                  id="xmlNote"
+                  hidden
+                >
+                  XML files only (.xml)
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 CONFIGURATION
+            ============================================== -->
+
+            <div class="configuration-grid">
+
+
+              <!-- DOCUMENT TYPE -->
+
+              <div class="config-card">
+
+                <div class="config-title">
+
+                  <span class="config-icon">
+                    ▤
+                  </span>
+
+                  <div>
+
+                    <h3>
+
+                      Document Type
+
+                      <span>
+                        *
+                      </span>
+
+                    </h3>
+
+                    <p>
+                      Select document category
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <select id="documentType">
+
+                  <option>
+                    Certificate of Completion
+                  </option>
+
+                  <option>
+                    Bank Statement
+                  </option>
+
+                  <option>
+                    Tax Certificate
+                  </option>
+
+                  <option>
+                    Identity Document
+                  </option>
+
+                  <option>
+                    Contract
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- JURISDICTION -->
+
+              <div class="config-card">
+
+                <div class="config-title">
+
+                  <span class="config-icon">
+                    ◎
+                  </span>
+
+                  <div>
+
+                    <h3>
+
+                      Market / Jurisdiction
+
+                      <span>
+                        *
+                      </span>
+
+                    </h3>
+
+                    <p>
+                      Select region for compliance rules
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <select id="jurisdiction">
+
+                  <option>
+                    🇨🇭 Switzerland
+                  </option>
+
+                  <option>
+                    🇩🇪 Germany
+                  </option>
+
+                  <option>
+                    🇬🇧 United Kingdom
+                  </option>
+
+                  <option>
+                    🇫🇷 France
+                  </option>
+
+                  <option>
+                    🇮🇹 Italy
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- LANGUAGE -->
+
+              <div class="config-card">
+
+                <div class="config-title">
+
+                  <span class="config-icon">
+                    文
+                  </span>
+
+                  <div>
+
+                    <h3>
+
+                      Expected Language
+
+                      <span>
+                        *
+                      </span>
+
+                    </h3>
+
+                    <p>
+                      Expected language of the document
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div class="language-options">
+
+
+                  <label>
+
+                    <input
+                      type="radio"
+                      name="language"
+                      value="English"
+                      checked
+                    />
+
+                    <span>
+                      🇬🇧 English
+                    </span>
+
+                  </label>
+
+
+                  <label>
+
+                    <input
+                      type="radio"
+                      name="language"
+                      value="German"
+                    />
+
+                    <span>
+                      🇩🇪 German
+                    </span>
+
+                  </label>
+
+
+                  <label>
+
+                    <input
+                      type="radio"
+                      name="language"
+                      value="French"
+                    />
+
+                    <span>
+                      🇫🇷 French
+                    </span>
+
+                  </label>
+
+
+                  <label>
+
+                    <input
+                      type="radio"
+                      name="language"
+                      value="Italian"
+                    />
+
+                    <span>
+                      🇮🇹 Italian
+                    </span>
+
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 WHAT ADIA CHECKS
+            ============================================== -->
+
+            <section class="checks-card">
+
+              <div class="section-heading">
+
+                <div class="sparkle">
+                  ✦
+                </div>
+
+
+                <div>
+
+                  <h2>
+                    What ADIA Will Check
+                  </h2>
+
+                  <p>
+                    All validations run automatically using
+                    AI and rule-based engines
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <div class="checks-grid">
+
+
+                <div class="check-item">
+
+                  <span>
+                    ▤
+                  </span>
+
+                  <strong>
+                    OCR
+                  </strong>
+
+                  <small>
+                    Text Extraction
+                  </small>
+
+                </div>
+
+
+                <div class="check-item">
+
+                  <span>
+                    ◎
+                  </span>
+
+                  <strong>
+                    Language
+                  </strong>
+
+                  <small>
+                    Language Detection
+                  </small>
+
+                </div>
+
+
+                <div class="check-item">
+
+                  <span>
+                    ▣
+                  </span>
+
+                  <strong>
+                    Content
+                  </strong>
+
+                  <small>
+                    Content Validation
+                  </small>
+
+                </div>
+
+
+                <div class="check-item">
+
+                  <span>
+                    ▧
+                  </span>
+
+                  <strong>
+                    Visual
+                  </strong>
+
+                  <small>
+                    Layout Analysis
+                  </small>
+
+                </div>
+
+
+                <div class="check-item">
+
+                  <span>
+                    ✓
+                  </span>
+
+                  <strong>
+                    Compliance
+                  </strong>
+
+                  <small>
+                    Compliance Screening
+                  </small>
+
+                </div>
+
+
+                <div class="check-item">
+
+                  <span>
+                    ◎
+                  </span>
+
+                  <strong>
+                    Localization
+                  </strong>
+
+                  <small>
+                    Localization Review
+                  </small>
+
+                </div>
+
+
+                <div class="check-item">
+
+                  <span>
+                    🧠
+                  </span>
+
+                  <strong>
+                    AI Semantic
+                  </strong>
+
+                  <small>
+                    Comparison
+                  </small>
+
+                </div>
+
+
+                <div class="check-item">
+
+                  <span>
+                    💡
+                  </span>
+
+                  <strong>
+                    Smart
+                  </strong>
+
+                  <small>
+                    Recommendations
+                  </small>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 ACTION BAR
+            ============================================== -->
+
+            <div class="action-bar">
+
+              <button
+                type="button"
+                class="btn-reset"
+                id="cancelBtn"
+              >
+                ↻ Reset
+              </button>
+
+
+              <button
+                type="submit"
+                class="btn-verify"
+                id="compareBtn"
+              >
+
+                ✦ Start AI Verification
+
+                <span>
+                  →
+                </span>
+
+              </button>
+
+            </div>
+
+
+            <p
+              class="engine-status"
+              id="engineStatus"
+            >
+              Checking backend…
+            </p>
+
+          </form>
+
+        </div>
+
+
+        <!-- =================================================
+             ASK ADIA
+        ================================================== -->
+
+        <aside
+          class="ask-adia"
+          id="aiChatPanel"
+        >
+
+          <!-- HEADER -->
+
+          <div class="adia-bot-header">
+
+            <div class="bot-icon">
+              🤖
+            </div>
+
+
+            <div>
+
+              <h2>
+                Ask ADIA
+              </h2>
+
+              <p>
+                Verification report assistant
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="ai-chat-close"
+              id="aiChatClose"
+              aria-label="Close ADIA"
+            >
+              ×
+            </button>
+
+          </div>
+
+
+          <!-- CHAT MESSAGES -->
+
+          <div
+            class="bot-message"
+            id="aiChatMessages"
+          >
+
+            <div class="chat-ai-message">
+
+              <strong>
+                Hi! I'm ADIA.
+              </strong>
+
+              <p>
+                Run a document verification and I can answer
+                questions about your generated verification report.
+              </p>
+
+
+              <ul>
+
+                <li>
+                  Why did this document fail?
+                </li>
+
+                <li>
+                  What are the high severity issues?
+                </li>
+
+                <li>
+                  What should I fix first?
+                </li>
+
+                <li>
+                  Explain the verification report simply.
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+
+          <!-- SUGGESTIONS -->
+
+          <div class="try-asking">
+
+            <span>
+              Try asking:
+            </span>
+
+
+            <button
+              type="button"
+              class="ai-suggestion"
+              data-question="Why did this document fail?"
+            >
+              Why did this document fail?
+            </button>
+
+
+            <button
+              type="button"
+              class="ai-suggestion"
+              data-question="What are the high severity issues?"
+            >
+              What are the high severity issues?
+            </button>
+
+
+            <button
+              type="button"
+              class="ai-suggestion"
+              data-question="Which category has the most problems?"
+            >
+              Which category has the most problems?
+            </button>
+
+
+            <button
+              type="button"
+              class="ai-suggestion"
+              data-question="What should I fix first?"
+            >
+              What should I fix first?
+            </button>
+
+
+            <button
+              type="button"
+              class="ai-suggestion"
+              data-question="Are there any grammar issues?"
+            >
+              Are there any grammar issues?
+            </button>
+
+
+            <button
+              type="button"
+              class="ai-suggestion"
+              data-question="What is missing from the Actual PDF?"
+            >
+              What is missing from the Actual PDF?
+            </button>
+
+          </div>
+
+
+          <!-- CHAT INPUT -->
+
+          <div class="chat-input">
+
+            <input
+              type="text"
+              id="aiChatInput"
+              placeholder="Ask about this verification report..."
+              autocomplete="off"
+            />
+
+
+            <button
+              type="button"
+              id="aiChatSend"
+              aria-label="Send message"
+            >
+              →
+            </button>
+
+          </div>
+
+
+          <div
+            id="chatStatus"
+            class="chat-status"
+          >
+            ADIA is ready
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         STEP 2 — RESULTS
+    ====================================================== -->
+
+    <section
+      class="panel results-panel step-panel"
+      id="panel2"
+    >
+
+
+      <!-- ===================================================
+           RESULTS HEADER
+      ==================================================== -->
+
+      <div class="results-header">
+
+        <div class="results-title-area">
+
+          <div class="results-icon">
+            ✓
+          </div>
+
+
+          <div>
+
+            <span class="results-eyebrow">
+              ADIA VERIFICATION
+            </span>
+
+
+            <h1>
+              Verification Report
+            </h1>
+
+
+            <p id="resultsSub">
+              Your document has been compared against
+              the reference document.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="results-actions">
+
+          <button
+            type="button"
+            class="btn btn-outline"
+            id="backBtn"
+          >
+            ← Review Documents
+          </button>
+
+
+          <button
+            type="button"
+            class="btn btn-export"
+            id="exportBtn"
+            disabled
+          >
+            ↓ Export Report
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           DOCUMENT MATCH LEVEL
+      ==================================================== -->
+
+      <section class="mismatch-level-card">
+
+        <div class="mismatch-level-header">
+
+          <div>
+
+            <span class="section-eyebrow">
+              DOCUMENT COMPARISON
+            </span>
+
+
+            <h2>
+              Match Level
+            </h2>
+
+
+            <p>
+              Overall similarity between the actual
+              and reference documents.
+            </p>
+
+          </div>
+
+
+          <div class="mismatch-level-value">
+
+            <strong id="mismatchPercentage">
+              100%
+            </strong>
+
+
+            <span id="mismatchLabel">
+              Excellent Match
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="mismatch-bar-wrapper">
+
+          <div class="mismatch-bar">
+
+            <div
+              class="mismatch-bar-fill"
+              id="mismatchBarFill"
+            ></div>
+
+          </div>
+
+
+          <div class="mismatch-scale">
+
+            <span>
+              0% · No Match
+            </span>
+
+            <span>
+              50% · Partial
+            </span>
+
+            <span>
+              100% · Perfect Match
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           OVERALL RESULT
+      ==================================================== -->
+
+      <div
+        class="overall-result"
+        id="overallResult"
+      >
+
+        <div
+          class="overall-result-icon"
+          id="overallResultIcon"
+        >
+          ✓
+        </div>
+
+
+        <div class="overall-result-content">
+
+          <span
+            class="overall-result-label"
+            id="overallResultLabel"
+          >
+            Verification Complete
+          </span>
+
+          <p id="overallResultDescription">
+            ADIA has completed the document comparison
+            and identified areas that may require attention.
+          </p>
+
+        </div>
+
+
+        <div class="overall-result-meta">
+
+          <span>
+            DOCUMENT STATUS
+          </span>
+
+
+          <strong id="overallResultStatus">
+            REVIEW
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===================================================
+           SUMMARY
+      ==================================================== -->
+
+      <section class="results-section">
+
+        <div class="results-section-heading">
+
+          <div>
+
+            <span class="section-eyebrow">
+              AT A GLANCE
+            </span>
+
+
+            <div
+              id="aiValidationSummary"
+              class="ai-validation-summary"
+            >
+
+              <div class="ai-summary-content">
+
+                <div class="ai-summary-badge">
+                  ✨ AI Analysis
+                </div>
+
+
+                <div class="ai-summary-text">
+
+                  <p>
+                    AI validation summary will appear here
+                    after verification.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <h2>
+              Verification Summary
+            </h2>
+
+
+            <p>
+              A quick overview of the checks performed by ADIA.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="cv-summary"
+          id="cvSummary"
+        ></div>
+
+      </section>
+
+
+      <!-- ===================================================
+           CATEGORY OVERVIEW
+      ==================================================== -->
+
+      <section class="results-section">
+
+        <div class="results-section-heading">
+
+          <div>
+
+            <span class="section-eyebrow">
+              VALIDATION AREAS
+            </span>
+
+
+            <h2>
+              What ADIA Checked
+            </h2>
+
+
+            <p>
+              Select a category to see the exact findings.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="category-overview"
+          id="categoryOverview"
+        ></div>
+
+      </section>
+
+
+      <!-- ===================================================
+           VISUAL COMPARISON
+      ==================================================== -->
+
+      <section
+        class="visual-results-card"
+        id="cvPreview"
+        hidden
+      >
+
+        <div class="visual-results-header">
+
+          <div>
+
+            <span class="section-eyebrow">
+              DOCUMENT VISUALS
+            </span>
+
+
+            <h2>
+              Visual Comparison
+            </h2>
+
+
+            <p>
+              Compare the generated document
+              with the expected reference.
+            </p>
+
+          </div>
+
+
+          <label class="cv-diff-toggle">
+
+            <input
+              type="checkbox"
+              id="showDiffToggle"
+              checked
+            />
+
+            <span>
+              Show Difference
+            </span>
+
+          </label>
+
+        </div>
+
+
+        <div class="visual-legend">
+
+          <span>
+
+            <i class="legend-dot unchanged"></i>
+
+            Unchanged
+
+          </span>
+
+
+          <span>
+
+            <i class="legend-dot added"></i>
+
+            Present in Actual
+
+          </span>
+
+
+          <span>
+
+            <i class="legend-dot missing"></i>
+
+            Missing from Actual
+
+          </span>
+
+        </div>
+
+
+        <div
+          class="cv-diff-grid"
+          id="cvDiffGrid"
+        >
+
+
+          <!-- ACTUAL -->
+
+          <div class="cv-diff-col">
+
+            <div class="cv-diff-col-head">
+
+              <div>
+
+                <span>
+                  01
+                </span>
+
+                <strong>
+                  Actual Document
+                </strong>
+
+              </div>
+
+
+              <small>
+                Generated PDF
+              </small>
+
+            </div>
+
+
+            <iframe
+              id="actualFrame"
+              class="cv-diff-frame"
+              title="Actual PDF"
+            ></iframe>
+
+          </div>
+
+
+          <!-- REFERENCE -->
+
+          <div class="cv-diff-col">
+
+            <div class="cv-diff-col-head">
+
+              <div>
+
+                <span>
+                  02
+                </span>
+
+                <strong>
+                  Reference Document
+                </strong>
+
+              </div>
+
+
+              <small>
+                Expected PDF
+              </small>
+
+            </div>
+
+
+            <iframe
+              id="expectedFrame"
+              class="cv-diff-frame"
+              title="Expected PDF"
+            ></iframe>
+
+          </div>
+
+
+          <!-- DIFFERENCE -->
+
+          <div
+            class="cv-diff-col difference-column"
+            id="diffCol"
+          >
+
+            <div class="cv-diff-col-head">
+
+              <div>
+
+                <span>
+                  03
+                </span>
+
+                <strong>
+                  Difference
+                </strong>
+
+              </div>
+
+
+              <a
+                class="cv-diff-dl"
+                id="downloadDiff"
+                href="#"
+                target="_blank"
+                rel="noopener"
+              >
+                ↓ Download
+              </a>
+
+            </div>
+
+
+            <iframe
+              id="diffFrame"
+              class="cv-diff-frame"
+              title="Difference PDF"
+            ></iframe>
+
+
+            <p
+              class="cv-diff-none"
+              id="diffNone"
+              hidden
+            >
+              ✓ No visual differences detected.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           FINDINGS
+      ==================================================== -->
+
+      <section class="results-section findings-section">
+
+        <div class="results-section-heading">
+
+          <div>
+
+            <span class="section-eyebrow">
+              DETAILED ANALYSIS
+            </span>
+
+
+            <h2>
+              Findings &amp; Recommendations
+            </h2>
+
+
+            <p>
+              Review the issues identified by ADIA,
+              grouped by validation area.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="cv-report"
+          id="cvReport"
+        ></div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =========================================================
+     LOADER
+========================================================= -->
+
+<div
+  class="cv-loader"
+  id="cvLoader"
+  hidden
+>
+
+  <div class="cv-spinner"></div>
+
+
+  <p id="cvLoaderMsg">
+    Analysing PDFs…
+  </p>
+
+</div>
+
+
+<!-- =========================================================
+     VERIFICATION JAVASCRIPT
+========================================================= -->
+
+<script src="content-verification.js"></script>
+
+</body>
+</html>

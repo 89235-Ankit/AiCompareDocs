@@ -1,0 +1,37 @@
+{
+  "name": "atlassian-api-automation",
+  "version": "1.0.0",
+  "description": "API automation framework for Atlassian Confluence & JIRA Cloud REST APIs built with Playwright + TypeScript",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:jira": "playwright test tests/jira",
+    "test:confluence": "playwright test tests/confluence",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:headed": "playwright test --reporter=list",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts"
+  },
+  "keywords": [
+    "playwright",
+    "api",
+    "automation",
+    "jira",
+    "confluence",
+    "atlassian",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "dotenv": "^16.4.7",
+    "eslint": "^8.57.1",
+    "typescript": "^5.7.2"
+  }
+}

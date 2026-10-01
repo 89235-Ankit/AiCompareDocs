@@ -1,0 +1,33 @@
+plugins {
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
+    id 'java'
+}
+
+group = 'com.pdq'
+version = '0.0.1'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // PDF comparison (red6) — pixel-by-pixel visual diff (uses PDFBox 3.x)
+    implementation 'de.redsix:pdfcompare:1.2.3'
+
+    // Apache PDFBox 3.x — text extraction & page rendering
+    implementation 'org.apache.pdfbox:pdfbox:3.0.3'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

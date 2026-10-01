@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Case Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="generator-pro.css" />
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</head>
+<body class="pro">
+  <header class="pro-header">
+    <div class="pro-brand">
+      <span class="pro-logo">📋</span>
+      <h1>Test Case Generator</h1>
+    </div>
+    <a class="home-link dark" href="index.html">&larr; Home</a>
+  </header>
+
+  <!-- Stepper -->
+  <div class="stepper">
+    <div class="step active" id="step1">
+      <span class="step-num">1</span>
+      <span class="step-label">Test Case Input</span>
+    </div>
+    <span class="step-line"></span>
+    <div class="step" id="step2">
+      <span class="step-num">2</span>
+      <span class="step-label">Generated Test Cases</span>
+    </div>
+  </div>
+
+  <main class="pro-main">
+    <!-- ============ STEP 1: FORM ============ -->
+    <section class="panel form-panel step-panel active" id="panel1">
+      <form id="proForm" novalidate>
+
+        <!-- Reference Test Cases -->
+        <div class="field span-2">
+          <label class="field-label">Reference Test Cases <span class="req">*</span></label>
+          <p class="sub">Upload Excel files (.xlsx, .xls). Maximum 5 files.</p>
+          <div class="dropzone" id="refDrop">
+            <input type="file" id="refFiles" accept=".xlsx,.xls" multiple hidden />
+            <span class="dz-icon">⬆️</span>
+            <p><a class="dz-link">Click to upload</a> or drag and drop</p>
+            <span class="dz-note">You can upload up to 5 files</span>
+          </div>
+          <div class="chips" id="refChips"></div>
+        </div>
+
+        <!-- Type of Test Cases -->
+        <div class="field span-2">
+          <label class="field-label">Type of Test Cases <span class="req">*</span></label>
+          <div class="radio-group row">
+            <label class="radio"><input type="radio" name="testType" value="Unit" checked /> <span>Unit Test Cases</span></label>
+            <label class="radio"><input type="radio" name="testType" value="System" /> <span>System Test Cases</span></label>
+            <label class="radio"><input type="radio" name="testType" value="System Integration" /> <span>System Integration Test Cases</span></label>
+            <label class="radio"><input type="radio" name="testType" value="Business End to End (E2E)/UAT" /> <span>Business E2E Test Cases</span></label>
+          </div>
+        </div>
+
+        <!-- Functionality -->
+        <div class="field">
+          <label class="field-label" for="functionality">Functionality <span class="req">*</span></label>
+          <input type="text" id="functionality" placeholder="Enter functionality" />
+        </div>
+
+        <!-- Keywords -->
+        <div class="field">
+          <label class="field-label" for="keywords">Keywords <span class="req">*</span></label>
+          <textarea id="keywords" rows="2" placeholder="Enter keywords separated by comma"></textarea>
+          <p class="sub">Example: login, authentication, dashboard, user management</p>
+        </div>
+
+        <!-- Channels -->
+        <div class="field">
+          <label class="field-label" for="channels">Channels <span class="req">*</span></label>
+          <textarea id="channels" rows="2" placeholder="Enter channels separated by comma"></textarea>
+          <p class="sub">Example: Web, Mobile, API, Email</p>
+        </div>
+
+        <!-- Use Case -->
+        <div class="field span-2">
+          <label class="field-label">Use Case <span class="optional">(Optional)</span></label>
+          <p class="sub">Upload PPT or PDF document</p>
+          <div class="dropzone" id="useCaseDrop">
+            <input type="file" id="useCaseFile" accept=".ppt,.pptx,.pdf" hidden />
+            <span class="dz-icon">⬆️</span>
+            <p><a class="dz-link">Click to upload</a> or drag and drop</p>
+            <span class="dz-note" id="useCaseNote">PPT or PDF files only</span>
+          </div>
+        </div>
+
+        <!-- Scenario -->
+        <div class="field">
+          <label class="field-label" for="scenario">Scenario <span class="optional">(Optional)</span></label>
+          <textarea id="scenario" rows="2" placeholder="Enter scenarios separated by comma"></textarea>
+          <p class="sub">Example: New user registration, User login, Password reset</p>
+        </div>
+
+        <!-- Golden Test Case -->
+        <div class="field golden-box span-2">
+          <label class="field-label">Golden Test Case <span class="optional">(Optional)</span></label>
+          <p class="sub">Referred as the topmost priority to generate test cases.</p>
+          <div class="dropzone golden" id="goldenDrop">
+            <input type="file" id="goldenFile" accept=".xlsx,.xls" hidden />
+            <span class="dz-icon">⬆️</span>
+            <p><a class="dz-link">Click to upload</a> or drag and drop</p>
+            <span class="dz-note" id="goldenNote">Excel files only (.xlsx, .xls)</span>
+          </div>
+        </div>
+
+        <div class="actions center">
+          <button type="submit" class="btn btn-primary" id="generateBtn">🚀 Generate</button>
+          <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============ STEP 2: RESULTS ============ -->
+    <section class="panel results-panel step-panel" id="panel2">
+      <div class="results-top">
+        <div>
+          <h2>Generated Test Cases</h2>
+          <p class="sub" id="resultsSub">Below are the test cases generated based on your input.</p>
+        </div>
+        <div class="results-top-actions">
+          <button type="button" class="btn btn-outline" id="backBtn">&larr; Back to Input</button>
+          <button type="button" class="btn btn-export" id="exportBtn" disabled>📊 Export to Excel</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="pro-table">
+          <thead>
+            <tr>
+              <th>TC ID</th>
+              <th>Test Case Title</th>
+              <th>Type</th>
+              <th>Functionality</th>
+              <th>Preconditions</th>
+              <th>Test Steps</th>
+              <th>Expected Result</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody">
+            <tr class="empty-row"><td colspan="7">No test cases yet. Fill the form and click <strong>Generate</strong>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="pagination" hidden>
+        <span class="page-info" id="pageInfo"></span>
+        <div class="page-controls" id="pageControls"></div>
+        <select id="pageSize" class="page-size">
+          <option value="5" selected>5 / page</option>
+          <option value="10">10 / page</option>
+          <option value="25">25 / page</option>
+        </select>
+      </div>
+    </section>
+  </main>
+
+  <script src="generator-pro.js"></script>
+</body>
+</html>
